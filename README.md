@@ -51,11 +51,11 @@ import 'package:flutter_bluegps_sdk/flutter_bluegps_sdk.dart';
 
 final client = BlueGpsHttpClient(
   config: const BlueGpsServerConfig(
-    baseUrl: 'http://your-server:7280',
-    keycloakUrl: 'http://your-keycloak:8081',
-    keycloakRealm: 'bluegps',
-    clientId: 'frontend-credentials',
-    clientSecret: 'your-client-secret',
+    baseUrl: 'http://<HOST>:<PORT>',
+    keycloakUrl: 'http://<HOST>:<PORT>',
+    keycloakRealm: '<REALM>',
+    clientId: '<CLIENT_ID>',
+    clientSecret: '<CLIENT_SECRET>',
   ),
 );
 
@@ -65,7 +65,7 @@ final sdk = BlueGpsSdk(serverClient: client);
 ### 2. Initialize (login + config + start advertising)
 
 ```dart
-await sdk.init();
+await sdk.init(appId: 'my-app', uuid: 'device-uuid');
 // This performs:
 // 1. Guest login via Keycloak client_credentials
 // 2. Fetch device config from /api/v1/device/ios/conf
@@ -137,7 +137,7 @@ await sdk.stopAdvertising();
 
 | Method | Description |
 |---|---|
-| `init()` | Guest login, fetch device config, start advertising |
+| `init({required String appId, required String uuid})` | Guest login, fetch device config, start advertising |
 | `positionStream([SsePositionRequest])` | Open SSE position stream |
 | `startAdvertising(QuuppaAdvertisingConfig)` | Start BLE beacon advertising |
 | `stopAdvertising()` | Stop advertising |
