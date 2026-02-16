@@ -23,6 +23,16 @@ class IosAdvertisingConf {
       tOff: (json['tOff'] as num?)?.toDouble(),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'tagid': tagid,
+      'byte1': byte1,
+      'byte2': byte2,
+      if (tOn != null) 'tOn': tOn,
+      if (tOff != null) 'tOff': tOff,
+    };
+  }
 }
 
 /// Device configuration returned by the server.
@@ -47,9 +57,9 @@ class DeviceConfiguration {
       uuid: json['uuid'] as String?,
       pushToken: json['pushToken'] as String?,
       nfcToken: json['nfcToken'] as String?,
-      iOSAdvConf: json['iOSAdvConf'] != null
+      iOSAdvConf: json['iosadvConf'] != null
           ? IosAdvertisingConf.fromJson(
-              json['iOSAdvConf'] as Map<String, dynamic>)
+              json['iosadvConf'] as Map<String, dynamic>)
           : null,
     );
   }
