@@ -114,7 +114,15 @@ class _DemoPageState extends State<DemoPage> {
     _positionSub?.cancel();
     _addLog('Opening SSE position stream...');
 
-    _positionSub = _sdk.positionStream().listen(
+    _positionSub = _sdk
+        .positionStream(
+      SsePositionRequest(
+          filter: SsePositionFilter(
+        tagIdList: [_sdk.deviceConfig?.iOSAdvConf?.tagid ?? 'unknown-tag'],
+        tagType: TagPositionType.physical,
+      )),
+    )
+        .listen(
       (data) {
         _addLog('Position: $data');
       },
@@ -166,11 +174,17 @@ class _DemoPageState extends State<DemoPage> {
               spacing: 8,
               children: [
                 ElevatedButton(
-                  onPressed: _sdk.deviceConfig == null ? _initialize : null,
+                  onPressed:
+                      _sdk.deviceConfig == null || _status.contains('Error')
+                          ? _initialize
+                          : null,
                   child: const Text('Init SDK'),
                 ),
                 ElevatedButton(
-                  onPressed: _sdk.deviceConfig != null && _positionSub == null
+                  onPressed: _sdk.deviceConfig?.iOSAdvConf != null &&
+                          !_status.contains('Error') &&
+                          _positionSub == null &&
+                          _positionSub == null
                       ? _startPositionStream
                       : null,
                   child: const Text('Start SSE'),
