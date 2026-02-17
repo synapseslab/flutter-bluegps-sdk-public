@@ -1,6 +1,7 @@
 import 'auth/auth_models.dart';
 import 'config/server_config.dart';
 import 'models/device_config.dart';
+import 'models/position.dart';
 import 'sse/sse_models.dart';
 
 /// Abstract client for communicating with the BlueGPS server.
@@ -20,8 +21,12 @@ abstract class BlueGpsClient {
       {required String appId, required String uuid});
 
   /// Open an SSE stream for real-time filtered positions.
-  /// Returns a stream of raw position event data.
-  Stream<Map<String, dynamic>> positionStream(SsePositionRequest request);
+  /// Returns a stream of position data keyed by tagId.
+  Stream<Map<String, List<MapPositionModel>>> positionStream(
+      SsePositionRequest request);
+
+  /// Close the current SSE position stream connection.
+  void stopPositionStream();
 
   /// Dispose of resources (HTTP client, etc.).
   void dispose();

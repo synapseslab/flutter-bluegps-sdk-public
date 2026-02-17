@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer' as developer;
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bluegps_sdk/flutter_bluegps_sdk.dart';
@@ -38,7 +39,7 @@ class _DemoPageState extends State<DemoPage> {
   String _status = 'Not initialized';
   String? _error;
   final List<String> _logs = [];
-  StreamSubscription<Map<String, dynamic>>? _positionSub;
+  StreamSubscription<Map<String, List<MapPositionModel>>>? _positionSub;
 
   @override
   void initState() {
@@ -46,11 +47,11 @@ class _DemoPageState extends State<DemoPage> {
 
     final client = BlueGpsHttpClient(
       config: const BlueGpsServerConfig(
-        baseUrl: 'http://<HOST>:<PORT>',
-        keycloakUrl: 'http://<HOST>:<PORT>',
-        keycloakRealm: '<REALM>',
-        clientId: '<CLIENT_ID>',
-        clientSecret: '<CLIENT_SECRET>',
+        baseUrl: 'https://demo.bluegps.cloud',
+        keycloakUrl: 'https://demo.bluegps.cloud/auth',
+        keycloakRealm: 'bluegps',
+        clientId: 'guest-client',
+        clientSecret: 'iLm5Hlkv6AYIwImwTqigna75unRxsWr0',
       ),
       httpClient: http.Client(),
     );
@@ -86,17 +87,24 @@ class _DemoPageState extends State<DemoPage> {
       _addLog('Starting SDK init...');
 
       await _sdk.init(
-        appId: 'flutter-sdk',
-        uuid: 'flutter-device',
+        appId: Platform.isAndroid ? 'flutter-sdk-android' : 'flutter-sdk-ios',
+        uuid: Platform.isAndroid
+            ? 'flutter-device-android'
+            : 'flutter-device-ios',
       );
 
       final config = _sdk.deviceConfig;
       _addLog('Login OK');
       _addLog('Device config: appId=${config?.appId}, uuid=${config?.uuid}');
-      if (config?.iOSAdvConf != null) {
+
+      if (Platform.isAndroid && config?.androidAdvConf != null) {
+        final adv = config!.androidAdvConf!;
+        _addLog(
+            'Android adv config: tagid=${adv.tagid}, mode=${adv.advModes}, txPower=${adv.advTxPowers}');
+      } else if (config?.iOSAdvConf != null) {
         final adv = config!.iOSAdvConf!;
         _addLog(
-            'Advertising config: tagid=${adv.tagid}, byte1=${adv.byte1}, byte2=${adv.byte2}');
+            'iOS adv config: tagid=${adv.tagid}, byte1=${adv.byte1}, byte2=${adv.byte2}');
       }
 
       setState(() => _status = 'Initialized - Advertising started');
@@ -117,10 +125,10 @@ class _DemoPageState extends State<DemoPage> {
     _positionSub = _sdk
         .positionStream(
       SsePositionRequest(
-          filter: SsePositionFilter(
-        tagIdList: [_sdk.deviceConfig?.iOSAdvConf?.tagid ?? 'unknown-tag'],
-        tagType: TagPositionType.physical,
-      )),
+        filter: SsePositionFilter(
+          tagIdList: _resolveTagIds(),
+        ),
+      ),
     )
         .listen(
       (data) {
@@ -140,8 +148,21 @@ class _DemoPageState extends State<DemoPage> {
   void _stopPositionStream() {
     _positionSub?.cancel();
     _positionSub = null;
+    _sdk.stopPositionStream();
     _addLog('Position stream stopped');
     setState(() => _status = 'Stream stopped');
+  }
+
+  List<String> _resolveTagIds() {
+    final config = _sdk.deviceConfig;
+    if (config == null) return [];
+    if (Platform.isAndroid) {
+      return config.androidAdvConf != null
+          ? [config.androidAdvConf!.tagid]
+          : [];
+    }
+    final iosConf = config.iOSAdvConf;
+    return iosConf != null ? [iosConf.tagid] : [];
   }
 
   @override
@@ -181,9 +202,9 @@ class _DemoPageState extends State<DemoPage> {
                   child: const Text('Init SDK'),
                 ),
                 ElevatedButton(
-                  onPressed: _sdk.deviceConfig?.iOSAdvConf != null &&
+                  onPressed: _sdk.deviceConfig != null &&
+                          _resolveTagIds().isNotEmpty &&
                           !_status.contains('Error') &&
-                          _positionSub == null &&
                           _positionSub == null
                       ? _startPositionStream
                       : null,

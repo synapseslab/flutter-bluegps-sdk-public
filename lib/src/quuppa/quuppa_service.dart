@@ -1,29 +1,60 @@
-import 'package:bgps_flutter_quuppa_driver/bgps_flutter_quuppa_driver.dart'
+import 'dart:io';
+
+import 'package:bgps_flutter_ios_quuppa_driver/bgps_flutter_quuppa_ios_driver.dart'
     as quuppa;
 
 import '../models/ble_frequency.dart';
 import '../models/bluetooth_state.dart';
 import '../models/sdk_event.dart';
 import '../models/sdk_exception.dart';
+import 'android_quuppa_service.dart';
 import 'quuppa_config.dart';
 
-/// Service wrapping the Quuppa BLE advertising plugin.
+/// Abstract service for Quuppa BLE advertising.
 ///
-/// All interaction with the underlying `bgps_flutter_quuppa_driver` plugin
-/// goes through this class. Consumers should not import the raw plugin.
-class QuuppaService {
+/// Use [QuuppaService.forPlatform] to get the platform-appropriate
+/// implementation via factory method pattern.
+abstract class QuuppaService {
+  /// Stream of advertising and Bluetooth state events.
+  Stream<BlueGpsEvent> get eventStream;
+
+  /// Start advertising with the given configuration.
+  Future<void> startAdvertising(QuuppaAdvertisingConfig config);
+
+  /// Stop advertising.
+  Future<void> stopAdvertising();
+
+  /// Get current Bluetooth adapter state.
+  Future<BlueGpsBluetoothState> getBluetoothState();
+
+  /// Whether the device is currently advertising.
+  Future<bool> isAdvertising();
+
+  /// Factory that returns the platform-appropriate [QuuppaService].
+  factory QuuppaService.forPlatform() {
+    if (Platform.isIOS) return IosQuuppaService();
+    if (Platform.isAndroid) return AndroidQuuppaService();
+    throw UnsupportedError(
+        'QuuppaService is not supported on ${Platform.operatingSystem}');
+  }
+}
+
+/// iOS implementation of [QuuppaService] using `bgps_flutter_quuppa_driver`.
+class IosQuuppaService implements QuuppaService {
   Stream<BlueGpsEvent>? _eventStream;
 
-  /// Stream of advertising and Bluetooth state events.
+  @override
   Stream<BlueGpsEvent> get eventStream {
     _eventStream ??= quuppa.BgpsFlutterQuuppaDriver.eventStream.map(_mapEvent);
     return _eventStream!;
   }
 
-  /// Start advertising with the given configuration.
-  ///
-  /// Throws [QuuppaException] on failure.
+  @override
   Future<void> startAdvertising(QuuppaAdvertisingConfig config) async {
+    if (config is! IosQuuppaAdvertisingConfig) {
+      throw QuuppaException(
+          'IosQuuppaService requires IosQuuppaAdvertisingConfig');
+    }
     try {
       await quuppa.BgpsFlutterQuuppaDriver.startAdvertising(
         tagId: config.tagId,
@@ -39,7 +70,7 @@ class QuuppaService {
     }
   }
 
-  /// Stop advertising.
+  @override
   Future<void> stopAdvertising() async {
     try {
       await quuppa.BgpsFlutterQuuppaDriver.stopAdvertising();
@@ -48,18 +79,17 @@ class QuuppaService {
     }
   }
 
-  /// Get current Bluetooth adapter state.
+  @override
   Future<BlueGpsBluetoothState> getBluetoothState() async {
     try {
-      final stateStr =
-          await quuppa.BgpsFlutterQuuppaDriver.getBluetoothState();
+      final stateStr = await quuppa.BgpsFlutterQuuppaDriver.getBluetoothState();
       return _mapBluetoothStateString(stateStr);
     } catch (e) {
       throw QuuppaException('Failed to get Bluetooth state', cause: e);
     }
   }
 
-  /// Whether the device is currently advertising.
+  @override
   Future<bool> isAdvertising() async {
     try {
       return await quuppa.BgpsFlutterQuuppaDriver.isAdvertising();
@@ -91,10 +121,8 @@ class QuuppaService {
       quuppa.BluetoothState.unknown => BlueGpsBluetoothState.unknown,
       quuppa.BluetoothState.poweredOn => BlueGpsBluetoothState.poweredOn,
       quuppa.BluetoothState.poweredOff => BlueGpsBluetoothState.poweredOff,
-      quuppa.BluetoothState.unauthorized =>
-        BlueGpsBluetoothState.unauthorized,
-      quuppa.BluetoothState.unsupported =>
-        BlueGpsBluetoothState.unsupported,
+      quuppa.BluetoothState.unauthorized => BlueGpsBluetoothState.unauthorized,
+      quuppa.BluetoothState.unsupported => BlueGpsBluetoothState.unsupported,
       quuppa.BluetoothState.resetting => BlueGpsBluetoothState.resetting,
     };
   }

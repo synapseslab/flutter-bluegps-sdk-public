@@ -4,6 +4,7 @@ export 'src/bluegps_sdk.dart';
 // Quuppa
 export 'src/quuppa/quuppa_service.dart';
 export 'src/quuppa/quuppa_config.dart';
+export 'src/quuppa/android_quuppa_service.dart';
 
 // Models
 export 'src/models/bluetooth_state.dart';

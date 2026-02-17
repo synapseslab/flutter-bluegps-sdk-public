@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'models/bluetooth_state.dart';
 import 'models/sdk_event.dart';
 import 'models/sdk_exception.dart';
@@ -5,6 +7,7 @@ import 'quuppa/quuppa_config.dart';
 import 'quuppa/quuppa_service.dart';
 import 'server/bluegps_client.dart';
 import 'server/models/device_config.dart';
+import 'server/models/position.dart';
 import 'server/sse/sse_models.dart';
 
 /// Main entry point for the BlueGPS SDK.
@@ -30,7 +33,7 @@ class BlueGpsSdk {
   BlueGpsSdk({
     QuuppaService? quuppaService,
     BlueGpsClient? serverClient,
-  })  : _quuppaService = quuppaService ?? QuuppaService(),
+  })  : _quuppaService = quuppaService ?? QuuppaService.forPlatform(),
         _serverClient = serverClient;
 
   /// The underlying Quuppa service, for advanced usage.
@@ -65,20 +68,26 @@ class BlueGpsSdk {
     );
 
     // 3. Start Quuppa advertising if config available
-    final advConf = _deviceConfig?.iOSAdvConf;
-    if (advConf != null) {
-      await startAdvertising(QuuppaAdvertisingConfig.fromIosConf(advConf));
+    final advertisingConfig = _resolveAdvertisingConfig(_deviceConfig);
+    if (advertisingConfig != null) {
+      await startAdvertising(advertisingConfig);
     }
   }
 
   /// Open a real-time SSE position stream.
   ///
   /// Requires [init] to have been called first.
-  Stream<Map<String, dynamic>> positionStream([SsePositionRequest? request]) {
+  Stream<Map<String, List<MapPositionModel>>> positionStream(
+      [SsePositionRequest? request]) {
     if (_serverClient == null) {
       throw BlueGpsSdkException('Server client not configured');
     }
     return _serverClient.positionStream(request ?? const SsePositionRequest());
+  }
+
+  /// Close the current SSE position stream connection.
+  void stopPositionStream() {
+    _serverClient?.stopPositionStream();
   }
 
   // ---- Quuppa convenience methods ----
@@ -103,5 +112,24 @@ class BlueGpsSdk {
   /// Release resources.
   void dispose() {
     _serverClient?.dispose();
+  }
+
+  // ---- Private helpers ----
+
+  QuuppaAdvertisingConfig? _resolveAdvertisingConfig(
+      DeviceConfiguration? config) {
+    if (config == null) return null;
+    if (Platform.isAndroid) {
+      final androidConf = config.androidAdvConf;
+      if (androidConf != null) {
+        return AndroidQuuppaAdvertisingConfig.fromServerConf(androidConf);
+      }
+    } else {
+      final iosConf = config.iOSAdvConf;
+      if (iosConf != null) {
+        return IosQuuppaAdvertisingConfig.fromServerConf(iosConf);
+      }
+    }
+    return null;
   }
 }

@@ -1,23 +1,40 @@
+import 'dart:async';
+
 import 'package:flutter_bluegps_sdk/flutter_bluegps_sdk.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+/// Stub [QuuppaService] for testing on non-mobile platforms.
+class StubQuuppaService implements QuuppaService {
+  @override
+  Stream<BlueGpsEvent> get eventStream => const Stream.empty();
+  @override
+  Future<void> startAdvertising(QuuppaAdvertisingConfig config) async {}
+  @override
+  Future<void> stopAdvertising() async {}
+  @override
+  Future<BlueGpsBluetoothState> getBluetoothState() async =>
+      BlueGpsBluetoothState.unknown;
+  @override
+  Future<bool> isAdvertising() async => false;
+}
 
 void main() {
   group('BlueGpsSdk', () {
     test('creates without server client', () {
-      final sdk = BlueGpsSdk();
+      final sdk = BlueGpsSdk(quuppaService: StubQuuppaService());
 
       expect(sdk.server, isNull);
       expect(sdk.quuppa, isA<QuuppaService>());
     });
 
     test('dispose does not throw without server client', () {
-      final sdk = BlueGpsSdk();
+      final sdk = BlueGpsSdk(quuppaService: StubQuuppaService());
 
       expect(() => sdk.dispose(), returnsNormally);
     });
 
     test('init throws without server client', () {
-      final sdk = BlueGpsSdk();
+      final sdk = BlueGpsSdk(quuppaService: StubQuuppaService());
 
       expect(
           () => sdk.init(
@@ -28,7 +45,7 @@ void main() {
     });
 
     test('positionStream throws without server client', () {
-      final sdk = BlueGpsSdk();
+      final sdk = BlueGpsSdk(quuppaService: StubQuuppaService());
 
       expect(() => sdk.positionStream(), throwsA(isA<BlueGpsSdkException>()));
     });
@@ -117,21 +134,10 @@ void main() {
     });
 
     test('BlueGpsPosition', () {
-      final now = DateTime.now();
-      final pos = BlueGpsPosition(
-        x: 10.5,
-        y: 20.3,
-        z: 1.0,
-        floorId: 'floor-1',
-        timestamp: now,
-        accuracy: 2.5,
-      );
+      final pos = MapPositionModel(x: 10.5, y: 20.3, mapId: 1);
       expect(pos.x, 10.5);
       expect(pos.y, 20.3);
-      expect(pos.z, 1.0);
-      expect(pos.floorId, 'floor-1');
-      expect(pos.timestamp, now);
-      expect(pos.accuracy, 2.5);
+      expect(pos.mapId, 1);
     });
 
     test('BlueGpsApiResponse.success', () {
@@ -151,13 +157,13 @@ void main() {
   });
 
   group('DeviceConfiguration', () {
-    test('fromJson parses full response', () {
+    test('fromJson parses full iOS response', () {
       final config = DeviceConfiguration.fromJson({
         'appId': 'app1',
         'uuid': 'uuid1',
         'pushToken': 'push1',
         'nfcToken': 'nfc1',
-        'iOSAdvConf': {
+        'iosadvConf': {
           'tagid': '000000000001',
           'byte1': 0,
           'byte2': 1,
@@ -173,12 +179,106 @@ void main() {
       expect(config.iOSAdvConf!.byte2, 1);
     });
 
-    test('fromJson handles missing iOSAdvConf', () {
+    test('fromJson parses Android response', () {
+      final config = DeviceConfiguration.fromJson({
+        'appId': 'app1',
+        'uuid': 'uuid1',
+        'androidAdvConf': {
+          'tagid': 'A0BB00000001',
+          'advModes': 'ADVERTISE_MODE_LOW_LATENCY',
+          'advTxPowers': 'ADVERTISE_TX_POWER_HIGH',
+        }
+      });
+      expect(config.appId, 'app1');
+      expect(config.androidAdvConf, isNotNull);
+      expect(config.androidAdvConf!.tagid, 'A0BB00000001');
+      expect(config.androidAdvConf!.advModes, AdvModes.lowLatency);
+      expect(config.androidAdvConf!.advTxPowers, AdvTxPowers.high);
+    });
+
+    test('fromJson handles missing iOSAdvConf and androidAdvConf', () {
       final config = DeviceConfiguration.fromJson({
         'appId': 'app1',
       });
       expect(config.appId, 'app1');
       expect(config.iOSAdvConf, isNull);
+      expect(config.androidAdvConf, isNull);
+    });
+  });
+
+  group('AndroidAdvertisingConf', () {
+    test('fromJson parses all fields', () {
+      final conf = AndroidAdvertisingConf.fromJson({
+        'tagid': 'A0BB00000001',
+        'advModes': 'ADVERTISE_MODE_BALANCED',
+        'advTxPowers': 'ADVERTISE_TX_POWER_MEDIUM',
+      });
+      expect(conf.tagid, 'A0BB00000001');
+      expect(conf.advModes, AdvModes.balanced);
+      expect(conf.advTxPowers, AdvTxPowers.medium);
+    });
+
+    test('fromJson handles null optional fields', () {
+      final conf = AndroidAdvertisingConf.fromJson({
+        'tagid': 'A0BB00000001',
+      });
+      expect(conf.tagid, 'A0BB00000001');
+      expect(conf.advModes, isNull);
+      expect(conf.advTxPowers, isNull);
+    });
+
+    test('toJson roundtrip', () {
+      const conf = AndroidAdvertisingConf(
+        tagid: 'A0BB00000001',
+        advModes: AdvModes.lowPower,
+        advTxPowers: AdvTxPowers.ultraLow,
+      );
+      final json = conf.toJson();
+      expect(json['tagid'], 'A0BB00000001');
+      expect(json['advModes'], 'ADVERTISE_MODE_LOW_POWER');
+      expect(json['advTxPowers'], 'ADVERTISE_TX_POWER_ULTRA_LOW');
+
+      final restored = AndroidAdvertisingConf.fromJson(json);
+      expect(restored.tagid, conf.tagid);
+      expect(restored.advModes, conf.advModes);
+      expect(restored.advTxPowers, conf.advTxPowers);
+    });
+  });
+
+  group('AdvModes', () {
+    test('fromJson parses all values', () {
+      expect(AdvModes.fromJson('ADVERTISE_MODE_LOW_POWER'), AdvModes.lowPower);
+      expect(AdvModes.fromJson('ADVERTISE_MODE_BALANCED'), AdvModes.balanced);
+      expect(
+          AdvModes.fromJson('ADVERTISE_MODE_LOW_LATENCY'), AdvModes.lowLatency);
+      expect(AdvModes.fromJson('UNKNOWN'), isNull);
+      expect(AdvModes.fromJson(null), isNull);
+    });
+
+    test('toJson produces correct strings', () {
+      expect(AdvModes.lowPower.toJson(), 'ADVERTISE_MODE_LOW_POWER');
+      expect(AdvModes.balanced.toJson(), 'ADVERTISE_MODE_BALANCED');
+      expect(AdvModes.lowLatency.toJson(), 'ADVERTISE_MODE_LOW_LATENCY');
+    });
+  });
+
+  group('AdvTxPowers', () {
+    test('fromJson parses all values', () {
+      expect(AdvTxPowers.fromJson('ADVERTISE_TX_POWER_ULTRA_LOW'),
+          AdvTxPowers.ultraLow);
+      expect(AdvTxPowers.fromJson('ADVERTISE_TX_POWER_LOW'), AdvTxPowers.low);
+      expect(AdvTxPowers.fromJson('ADVERTISE_TX_POWER_MEDIUM'),
+          AdvTxPowers.medium);
+      expect(AdvTxPowers.fromJson('ADVERTISE_TX_POWER_HIGH'), AdvTxPowers.high);
+      expect(AdvTxPowers.fromJson('UNKNOWN'), isNull);
+      expect(AdvTxPowers.fromJson(null), isNull);
+    });
+
+    test('toJson produces correct strings', () {
+      expect(AdvTxPowers.ultraLow.toJson(), 'ADVERTISE_TX_POWER_ULTRA_LOW');
+      expect(AdvTxPowers.low.toJson(), 'ADVERTISE_TX_POWER_LOW');
+      expect(AdvTxPowers.medium.toJson(), 'ADVERTISE_TX_POWER_MEDIUM');
+      expect(AdvTxPowers.high.toJson(), 'ADVERTISE_TX_POWER_HIGH');
     });
   });
 

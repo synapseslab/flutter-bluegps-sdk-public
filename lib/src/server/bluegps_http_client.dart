@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
@@ -7,6 +8,7 @@ import 'auth/auth_models.dart';
 import 'bluegps_client.dart';
 import 'config/server_config.dart';
 import 'models/device_config.dart';
+import 'models/position.dart';
 import 'sse/sse_models.dart';
 import 'sse/sse_service.dart';
 
@@ -65,8 +67,12 @@ class BlueGpsHttpClient implements BlueGpsClient {
       String uuid = 'flutter-sdk-device'}) async {
     _requireAuth();
     try {
+      final endpoint = Platform.isAndroid
+          ? '/api/v1/device/android/conf'
+          : '/api/v1/device/ios/conf';
+
       final response = await _httpClient.post(
-        Uri.parse('${config.baseUrl}/api/v1/device/ios/conf'),
+        Uri.parse('${config.baseUrl}$endpoint'),
         headers: {
           'Content-Type': 'application/json',
           ..._authHeaders,
@@ -91,7 +97,8 @@ class BlueGpsHttpClient implements BlueGpsClient {
   }
 
   @override
-  Stream<Map<String, dynamic>> positionStream(SsePositionRequest request) {
+  Stream<Map<String, List<MapPositionModel>>> positionStream(
+      SsePositionRequest request) {
     _requireAuth();
     _sseService?.dispose();
     _sseService = SseService(
@@ -100,6 +107,12 @@ class BlueGpsHttpClient implements BlueGpsClient {
       body: request.toJson(),
     );
     return _sseService!.stream;
+  }
+
+  @override
+  void stopPositionStream() {
+    _sseService?.dispose();
+    _sseService = null;
   }
 
   void _requireAuth() {

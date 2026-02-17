@@ -1,9 +1,17 @@
 import '../models/ble_frequency.dart';
 import '../server/models/device_config.dart';
 
-/// Configuration for Quuppa beacon advertising.
-class QuuppaAdvertisingConfig {
-  /// 12-character hexadecimal tag identifier.
+/// Base configuration for Quuppa beacon advertising.
+sealed class QuuppaAdvertisingConfig {
+  /// Tag identifier.
+  String get tagId;
+
+  const QuuppaAdvertisingConfig();
+}
+
+/// iOS-specific Quuppa advertising configuration.
+class IosQuuppaAdvertisingConfig extends QuuppaAdvertisingConfig {
+  @override
   final String tagId;
 
   /// First configuration byte (0-255).
@@ -21,7 +29,7 @@ class QuuppaAdvertisingConfig {
   /// BLE frequency preset. When set, overrides [tOn]/[tOff].
   final BlueGpsBleFrequency? frequency;
 
-  const QuuppaAdvertisingConfig({
+  const IosQuuppaAdvertisingConfig({
     required this.tagId,
     required this.byte1,
     required this.byte2,
@@ -31,13 +39,41 @@ class QuuppaAdvertisingConfig {
   });
 
   /// Create from server iOS advertising configuration.
-  factory QuuppaAdvertisingConfig.fromIosConf(IosAdvertisingConf conf) {
-    return QuuppaAdvertisingConfig(
+  factory IosQuuppaAdvertisingConfig.fromServerConf(IosAdvertisingConf conf) {
+    return IosQuuppaAdvertisingConfig(
       tagId: conf.tagid,
       byte1: conf.byte1,
       byte2: conf.byte2,
       tOn: conf.tOn,
       tOff: conf.tOff,
+    );
+  }
+}
+
+/// Android-specific Quuppa advertising configuration.
+class AndroidQuuppaAdvertisingConfig extends QuuppaAdvertisingConfig {
+  @override
+  final String tagId;
+
+  /// BLE advertising mode.
+  final AdvModes? advModes;
+
+  /// BLE advertising TX power level.
+  final AdvTxPowers? advTxPowers;
+
+  const AndroidQuuppaAdvertisingConfig({
+    required this.tagId,
+    this.advModes,
+    this.advTxPowers,
+  });
+
+  /// Create from server Android advertising configuration.
+  factory AndroidQuuppaAdvertisingConfig.fromServerConf(
+      AndroidAdvertisingConf conf) {
+    return AndroidQuuppaAdvertisingConfig(
+      tagId: conf.tagid,
+      advModes: conf.advModes,
+      advTxPowers: conf.advTxPowers,
     );
   }
 }

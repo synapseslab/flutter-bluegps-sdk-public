@@ -6,14 +6,19 @@ homepage: https://github.com/synapseslab/flutter-bluegps-sdk
 
 environment:
   sdk: ^3.6.1
-  flutter: '>=3.3.0'
+  flutter: ">=3.3.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  bgps_flutter_quuppa_driver:
+  bgps_flutter_ios_quuppa_driver:
     git:
       url: https://github.com/synapseslab/ios-bgps-quuppa-flutter-plugin.git
+      ref: e0a0129fb5b1d23369ff02bb91b14282e573c44a
+  bgps_flutter_android_quuppa_driver:
+    git:
+      url: https://github.com/synapseslab/android-bgps-quuppa-flutter-plugin.git
+      ref: ebe3831adb4fbbbc63694e830169a324faa4cd38
   http: ^1.2.0
 
 dev_dependencies:
