@@ -47,11 +47,11 @@ class _DemoPageState extends State<DemoPage> {
 
     final client = BlueGpsHttpClient(
       config: const BlueGpsServerConfig(
-        baseUrl: 'https://demo.bluegps.cloud',
-        keycloakUrl: 'https://demo.bluegps.cloud/auth',
-        keycloakRealm: 'bluegps',
-        clientId: 'guest-client',
-        clientSecret: 'iLm5Hlkv6AYIwImwTqigna75unRxsWr0',
+        baseUrl: 'http://<HOST>:<PORT>',
+        keycloakUrl: 'http://<HOST>:<PORT>',
+        keycloakRealm: '<REALM>',
+        clientId: '<CLIENT_ID>',
+        clientSecret: '<CLIENT_SECRET>',
       ),
       httpClient: http.Client(),
     );
