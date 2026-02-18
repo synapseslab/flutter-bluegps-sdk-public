@@ -10,9 +10,9 @@ Supports both **iOS** and **Android** with platform-specific BLE advertising plu
 
 - **Guest Login** — OAuth2 `client_credentials` via Keycloak
 - **Device Configuration** — fetch platform-specific advertising config from the server
-- **Quuppa BLE Advertising** — start/stop beacon advertising with server-provided config (iOS & Android)
-- **SSE Position Streaming** — real-time filtered position stream via Server-Sent Events
-- **Bluetooth State Monitoring** — reactive event stream with sealed classes for exhaustive pattern matching
+- **Quuppa BLE Advertising** — start/stop beacon advertising with server-provided config (iOS & Android); blocked when Bluetooth is off
+- **SSE Position Streaming** — real-time filtered position stream via Server-Sent Events; requires active advertising
+- **Bluetooth State Monitoring** — reactive event stream with sealed classes for exhaustive pattern matching; auto-restart advertising when Bluetooth is re-enabled; real-time BT on/off detection on Android via native BroadcastReceiver
 - **Platform Abstraction** — factory method pattern auto-selects the correct Quuppa service for iOS or Android
 
 ## Installation
@@ -84,30 +84,42 @@ final sdk = BlueGpsSdk(serverClient: client);
 ### 2. Initialize (login + config + start advertising)
 
 ```dart
-await sdk.init(appId: 'my-app', uuid: 'device-uuid');
-// This performs:
-// 1. Guest login via Keycloak client_credentials
-// 2. Fetch device config from the platform-specific endpoint:
-//    - iOS:     /api/v1/device/ios/conf
-//    - Android: /api/v1/device/android/conf
-// 3. Start Quuppa advertising with the received config
+try {
+  await sdk.init(appId: 'my-app', uuid: 'device-uuid');
+  // This performs:
+  // 1. Guest login via Keycloak client_credentials
+  // 2. Fetch device config from the platform-specific endpoint:
+  //    - iOS:     /api/v1/device/ios/conf
+  //    - Android: /api/v1/device/android/conf
+  // 3. Check Bluetooth state
+  // 4. Start Quuppa advertising with the received config
+  // 5. Begin monitoring BT state for auto-restart
+} on BlueGpsSdkException catch (e) {
+  // On iOS, thrown if Bluetooth is off.
+  // Advertising will auto-start when BT is re-enabled.
+  print('Init warning: $e');
+}
 ```
 
 ### 3. Stream real-time positions
 
+Requires active advertising. `positionStream()` is async and throws if Bluetooth is off or advertising is not active.
+
 ```dart
-sdk.positionStream().listen((data) {
+final stream = await sdk.positionStream();
+stream.listen((data) {
   print('Position: $data');
 });
 
 // With custom filters
-sdk.positionStream(const SsePositionRequest(
+final stream = await sdk.positionStream(const SsePositionRequest(
   filter: SsePositionFilter(
     tagIdList: ['000000000001'],
     tagType: TagPositionType.physical,
   ),
   update: SsePositionUpdate(refresh: 1000),
-)).listen((data) {
+));
+stream.listen((data) {
   print('Position: $data');
 });
 ```
@@ -170,13 +182,14 @@ await sdk.stopAdvertising();
 
 | Method | Description |
 |---|---|
-| `init({required String appId, required String uuid})` | Guest login, fetch device config, start advertising |
-| `positionStream([SsePositionRequest])` | Open SSE position stream |
-| `startAdvertising(QuuppaAdvertisingConfig)` | Start BLE beacon advertising |
-| `stopAdvertising()` | Stop advertising |
+| `init({required String appId, required String uuid})` | Guest login, fetch device config, check BT, start advertising |
+| `positionStream([SsePositionRequest])` | Open SSE position stream (async; throws if BT off or not advertising) |
+| `startAdvertising(QuuppaAdvertisingConfig)` | Start BLE beacon advertising (throws if BT off; enables auto-restart) |
+| `stopAdvertising()` | Stop advertising (disables auto-restart) |
 | `getBluetoothState()` | Get current Bluetooth adapter state |
 | `isAdvertising()` | Check if currently advertising |
 | `eventStream` | Stream of `BlueGpsEvent` updates |
+| `lastAdvertisingConfig` | Last config used, for manual restart |
 | `deviceConfig` | Device configuration (available after `init()`) |
 | `server` | Access to `BlueGpsClient` |
 | `quuppa` | Direct access to `QuuppaService` |

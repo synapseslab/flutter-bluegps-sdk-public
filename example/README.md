@@ -6,11 +6,11 @@ Supports both **iOS** and **Android** — the SDK auto-detects the platform and 
 
 ## What it does
 
-1. **Init SDK** — performs guest login (Keycloak), fetches device config from the platform-specific endpoint, and starts Quuppa BLE advertising
-2. **Start SSE** — opens a Server-Sent Events stream for real-time filtered positions
-3. **Stop SSE** — closes the position stream
+1. **Init SDK** — performs guest login (Keycloak), fetches device config, checks Bluetooth state, and starts Quuppa BLE advertising. If Bluetooth is off, shows an error and waits for auto-restart.
+2. **Start/Stop Adv** — manually start or stop BLE advertising. Start is blocked when Bluetooth is off. Stopping disables auto-restart; starting re-enables it.
+3. **Start/Stop SSE** — open or close a Server-Sent Events stream for real-time filtered positions. Start SSE is only enabled when advertising is active.
 
-All events are logged in a scrollable list with timestamps.
+The app shows a live **Bluetooth status indicator** (color-coded: green=on, red=off, orange=unauthorized/resetting) and **advertising status**. On Android, Bluetooth on/off is detected in real-time via the native BroadcastReceiver. All events are logged in a scrollable list with timestamps.
 
 ## Configuration
 

@@ -5,17 +5,33 @@ import 'package:flutter_test/flutter_test.dart';
 
 /// Stub [QuuppaService] for testing on non-mobile platforms.
 class StubQuuppaService implements QuuppaService {
+  final StreamController<BlueGpsEvent> _controller =
+      StreamController<BlueGpsEvent>.broadcast();
+  int startCount = 0;
+  int stopCount = 0;
+  QuuppaAdvertisingConfig? lastConfig;
+
   @override
-  Stream<BlueGpsEvent> get eventStream => const Stream.empty();
+  Stream<BlueGpsEvent> get eventStream => _controller.stream;
   @override
-  Future<void> startAdvertising(QuuppaAdvertisingConfig config) async {}
+  Future<void> startAdvertising(QuuppaAdvertisingConfig config) async {
+    startCount++;
+    lastConfig = config;
+  }
+
   @override
-  Future<void> stopAdvertising() async {}
+  Future<void> stopAdvertising() async {
+    stopCount++;
+  }
+
   @override
   Future<BlueGpsBluetoothState> getBluetoothState() async =>
       BlueGpsBluetoothState.unknown;
   @override
   Future<bool> isAdvertising() async => false;
+
+  void emitEvent(BlueGpsEvent event) => _controller.add(event);
+  void dispose() => _controller.close();
 }
 
 void main() {
@@ -44,10 +60,55 @@ void main() {
           throwsA(isA<BlueGpsSdkException>()));
     });
 
-    test('positionStream throws without server client', () {
+    test('positionStream throws without server client', () async {
       final sdk = BlueGpsSdk(quuppaService: StubQuuppaService());
 
       expect(() => sdk.positionStream(), throwsA(isA<BlueGpsSdkException>()));
+    });
+
+    test('startAdvertising stores config and enables auto-restart', () async {
+      final stub = StubQuuppaService();
+      final sdk = BlueGpsSdk(quuppaService: stub);
+
+      const config = IosQuuppaAdvertisingConfig(
+        tagId: '000000000001',
+        byte1: 0,
+        byte2: 1,
+      );
+
+      await sdk.startAdvertising(config);
+      expect(sdk.lastAdvertisingConfig, config);
+      expect(stub.startCount, 1);
+    });
+
+    test('stopAdvertising disables auto-restart', () async {
+      final stub = StubQuuppaService();
+      final sdk = BlueGpsSdk(quuppaService: stub);
+
+      const config = IosQuuppaAdvertisingConfig(
+        tagId: '000000000001',
+        byte1: 0,
+        byte2: 1,
+      );
+
+      await sdk.startAdvertising(config);
+      await sdk.stopAdvertising();
+      expect(stub.stopCount, 1);
+
+      // Emit poweredOn event — should NOT restart because auto-restart is off
+      stub.emitEvent(BlueGpsStateUpdate(
+        bluetoothState: BlueGpsBluetoothState.poweredOn,
+        isAdvertising: false,
+      ));
+
+      // Allow microtask to process
+      await Future.delayed(Duration.zero);
+
+      // startCount should still be 1 (the initial call)
+      expect(stub.startCount, 1);
+
+      stub.dispose();
+      sdk.dispose();
     });
   });
 
