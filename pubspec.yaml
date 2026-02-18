@@ -18,7 +18,7 @@ dependencies:
   bgps_flutter_android_quuppa_driver:
     git:
       url: https://github.com/synapseslab/android-bgps-quuppa-flutter-plugin.git
-      ref: ebe3831adb4fbbbc63694e830169a324faa4cd38
+      ref: 347eaf93431d1015300a1e51771b3897df012e3f
   http: ^1.2.0
 
 dev_dependencies:

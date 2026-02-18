@@ -50,16 +50,22 @@ class _DemoPageState extends State<DemoPage> {
 
     final client = BlueGpsHttpClient(
       config: const BlueGpsServerConfig(
-        baseUrl: 'http://<HOST>:<PORT>',
-        keycloakUrl: 'http://<HOST>:<PORT>',
-        keycloakRealm: '<REALM>',
-        clientId: '<CLIENT_ID>',
-        clientSecret: '<CLIENT_SECRET>',
+        baseUrl: 'https://demo.bluegps.cloud',
+        keycloakUrl: 'https://demo.bluegps.cloud/auth',
+        keycloakRealm: 'bluegps',
+        clientId: 'guest-client',
+        clientSecret: 'iLm5Hlkv6AYIwImwTqigna75unRxsWr0',
       ),
       httpClient: http.Client(),
     );
 
     _sdk = BlueGpsSdk(serverClient: client);
+
+    // Subscribe to events and fetch initial BT state immediately
+    _startEventStream();
+    _sdk.getBluetoothState().then((state) {
+      if (mounted) setState(() => _bluetoothState = state);
+    });
   }
 
   @override
@@ -112,9 +118,6 @@ class _DemoPageState extends State<DemoPage> {
       _status = 'Initializing...';
       _error = null;
     });
-
-    // Subscribe to events before init so we catch the initial STARTED event
-    _startEventStream();
 
     try {
       _addLog('Starting SDK init...');

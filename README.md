@@ -12,8 +12,8 @@ Supports both **iOS** and **Android** with platform-specific BLE advertising plu
 - **Device Configuration** — fetch platform-specific advertising config from the server
 - **Quuppa BLE Advertising** — start/stop beacon advertising with server-provided config (iOS & Android); blocked when Bluetooth is off
 - **SSE Position Streaming** — real-time filtered position stream via Server-Sent Events; requires active advertising
-- **Bluetooth State Monitoring** — reactive event stream with sealed classes for exhaustive pattern matching; auto-restart advertising when Bluetooth is re-enabled; real-time BT on/off detection on Android via native BroadcastReceiver
-- **Event Deduplication** — iOS event stream is deduplicated via `distinct()` so only actual state changes are forwarded, preventing log flooding from continuous native updates
+- **Bluetooth State Monitoring** — dedicated native Bluetooth state stream on Android (via BroadcastReceiver) merged with advertising status into a single `eventStream`; reactive sealed-class events for exhaustive pattern matching; auto-restart advertising when Bluetooth is re-enabled
+- **Event Deduplication** — event streams are deduplicated via `distinct()` so only actual state changes are forwarded, preventing log flooding from continuous native updates
 - **Platform Abstraction** — factory method pattern auto-selects the correct Quuppa service for iOS or Android
 
 ## Installation

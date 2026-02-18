@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:bgps_flutter_android_quuppa_driver/bgps_flutter_android_quuppa_driver.dart'
     as android_quuppa;
-import 'package:flutter/services.dart';
 
 import '../models/bluetooth_state.dart';
 import '../models/sdk_event.dart';
@@ -10,19 +11,15 @@ import 'quuppa_service.dart';
 
 /// Android implementation of [QuuppaService] using `bgps_flutter_android_quuppa_driver`.
 class AndroidQuuppaService implements QuuppaService {
-  static const _commandChannel =
-      MethodChannel('com.synapseslab.bluegps_sdk_flutter/command');
-
   final android_quuppa.BlueGpsAdvertisingService _service =
       android_quuppa.BlueGpsAdvertisingService();
 
   Stream<BlueGpsEvent>? _eventStream;
   bool _isAdvertising = false;
-  bool _userStopped = false;
 
   @override
   Stream<BlueGpsEvent> get eventStream {
-    _eventStream ??= _service.statusStream.map(_mapStatus);
+    _eventStream ??= _mergeStreams();
     return _eventStream!;
   }
 
@@ -46,7 +43,6 @@ class AndroidQuuppaService implements QuuppaService {
       );
       await _service.startAdvertising(nativeConfig);
       _isAdvertising = true;
-      _userStopped = false;
     } catch (e) {
       throw QuuppaException('Failed to start advertising', cause: e);
     }
@@ -55,7 +51,6 @@ class AndroidQuuppaService implements QuuppaService {
   @override
   Future<void> stopAdvertising() async {
     try {
-      _userStopped = true;
       await _service.stopAdvertising();
       _isAdvertising = false;
     } catch (e) {
@@ -66,17 +61,12 @@ class AndroidQuuppaService implements QuuppaService {
   @override
   Future<BlueGpsBluetoothState> getBluetoothState() async {
     try {
-      final enabled =
-          await _commandChannel.invokeMethod<bool>('isBluetoothEnabled');
-      if (enabled == true) return BlueGpsBluetoothState.poweredOn;
-      if (enabled == false) return BlueGpsBluetoothState.poweredOff;
-    } on MissingPluginException {
-      // Plugin does not implement isBluetoothEnabled yet — fall back.
-    } on PlatformException {
-      // Native error — fall back.
+      final state = await _service.getBluetoothState();
+      return _mapBluetoothState(state);
+    } catch (e) {
+      if (_isAdvertising) return BlueGpsBluetoothState.poweredOn;
+      return BlueGpsBluetoothState.unknown;
     }
-    if (_isAdvertising) return BlueGpsBluetoothState.poweredOn;
-    return BlueGpsBluetoothState.unknown;
   }
 
   @override
@@ -88,7 +78,45 @@ class AndroidQuuppaService implements QuuppaService {
   static Future<bool> requestPermissions() =>
       android_quuppa.BlueGpsPermissions.requestAdvertisingPermissions();
 
-  // ---- Private mapping helpers ----
+  // ---- Private helpers ----
+
+  /// Merges the advertising status stream and the Bluetooth state stream
+  /// into a single [BlueGpsEvent] stream.
+  Stream<BlueGpsEvent> _mergeStreams() {
+    final controller = StreamController<BlueGpsEvent>.broadcast();
+
+    final advSub = _service.statusStream.listen(
+      (status) => controller.add(_mapStatus(status)),
+      onError: (e) => controller.addError(e),
+    );
+
+    final btSub = _service.bluetoothStateStream.listen(
+      (state) => controller.add(_mapBtStateEvent(state)),
+      onError: (e) => controller.addError(e),
+    );
+
+    controller.onCancel = () {
+      advSub.cancel();
+      btSub.cancel();
+    };
+
+    return controller.stream.distinct();
+  }
+
+  BlueGpsEvent _mapBtStateEvent(android_quuppa.BluetoothState state) {
+    return BlueGpsBluetoothStateChanged(
+      state: _mapBluetoothState(state),
+      isReady: state == android_quuppa.BluetoothState.on,
+    );
+  }
+
+  BlueGpsBluetoothState _mapBluetoothState(
+      android_quuppa.BluetoothState state) {
+    return switch (state) {
+      android_quuppa.BluetoothState.on => BlueGpsBluetoothState.poweredOn,
+      android_quuppa.BluetoothState.off => BlueGpsBluetoothState.poweredOff,
+    };
+  }
 
   BlueGpsEvent _mapStatus(android_quuppa.AdvertisingStatus status) {
     switch (status.status) {
@@ -100,19 +128,14 @@ class AndroidQuuppaService implements QuuppaService {
         );
       case android_quuppa.ServiceStatus.STOPPED:
         _isAdvertising = false;
-        // User-initiated stop: BT is still on.
-        // External stop (BT turned off): report poweredOff.
-        final btState = _userStopped
-            ? BlueGpsBluetoothState.poweredOn
-            : BlueGpsBluetoothState.poweredOff;
-        _userStopped = false;
+        // BT state is handled by the dedicated bluetoothStateStream.
+        // Stopping advertising does not mean BT is off.
         return BlueGpsStateUpdate(
-          bluetoothState: btState,
+          bluetoothState: BlueGpsBluetoothState.poweredOn,
           isAdvertising: false,
         );
       case android_quuppa.ServiceStatus.ERROR:
         _isAdvertising = false;
-        // Native BroadcastReceiver sends ERROR when BT is turned off.
         if (status.message.contains('Bluetooth')) {
           return BlueGpsStateUpdate(
             bluetoothState: BlueGpsBluetoothState.poweredOff,
