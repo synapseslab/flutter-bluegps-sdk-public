@@ -45,7 +45,8 @@ class IosQuuppaService implements QuuppaService {
 
   @override
   Stream<BlueGpsEvent> get eventStream {
-    _eventStream ??= quuppa.BgpsFlutterQuuppaDriver.eventStream.map(_mapEvent);
+    _eventStream ??=
+        quuppa.BgpsFlutterQuuppaDriver.eventStream.map(_mapEvent).distinct();
     return _eventStream!;
   }
 

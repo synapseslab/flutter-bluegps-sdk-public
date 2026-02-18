@@ -10,7 +10,7 @@ Supports both **iOS** and **Android** — the SDK auto-detects the platform and 
 2. **Start/Stop Adv** — manually start or stop BLE advertising. Start is blocked when Bluetooth is off. Stopping disables auto-restart; starting re-enables it.
 3. **Start/Stop SSE** — open or close a Server-Sent Events stream for real-time filtered positions. Start SSE is only enabled when advertising is active.
 
-The app shows a live **Bluetooth status indicator** (color-coded: green=on, red=off, orange=unauthorized/resetting) and **advertising status**. On Android, Bluetooth on/off is detected in real-time via the native BroadcastReceiver. All events are logged in a scrollable list with timestamps.
+The app shows a live **Bluetooth status indicator** (color-coded: green=on, red=off, orange=unauthorized/resetting) and **advertising status**. On Android, Bluetooth on/off is detected in real-time via the native BroadcastReceiver. On iOS, the event stream is deduplicated so only actual state changes appear in the log. All events are logged in a scrollable list with timestamps.
 
 ## Configuration
 

@@ -16,6 +16,17 @@ class BlueGpsStateUpdate extends BlueGpsEvent {
   });
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BlueGpsStateUpdate &&
+          bluetoothState == other.bluetoothState &&
+          isAdvertising == other.isAdvertising &&
+          error == other.error;
+
+  @override
+  int get hashCode => Object.hash(bluetoothState, isAdvertising, error);
+
+  @override
   String toString() =>
       'BlueGpsStateUpdate(bluetoothState: $bluetoothState, isAdvertising: $isAdvertising, error: $error)';
 }
@@ -31,6 +42,16 @@ class BlueGpsBluetoothStateChanged extends BlueGpsEvent {
   });
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BlueGpsBluetoothStateChanged &&
+          state == other.state &&
+          isReady == other.isReady;
+
+  @override
+  int get hashCode => Object.hash(state, isReady);
+
+  @override
   String toString() =>
       'BlueGpsBluetoothStateChanged(state: $state, isReady: $isReady)';
 }
@@ -40,6 +61,14 @@ class BlueGpsError extends BlueGpsEvent {
   final String message;
 
   BlueGpsError({required this.message});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BlueGpsError && message == other.message;
+
+  @override
+  int get hashCode => message.hashCode;
 
   @override
   String toString() => 'BlueGpsError(message: $message)';
