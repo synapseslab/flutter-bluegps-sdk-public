@@ -1,6 +1,6 @@
 name: flutter_bluegps_sdk
 description: BlueGPS SDK for Flutter - Quuppa indoor positioning and BlueGPS server integration.
-version: 0.1.0
+version: 1.0.0-beta.1
 publish_to: none
 homepage: https://github.com/synapseslab/flutter-bluegps-sdk
 
