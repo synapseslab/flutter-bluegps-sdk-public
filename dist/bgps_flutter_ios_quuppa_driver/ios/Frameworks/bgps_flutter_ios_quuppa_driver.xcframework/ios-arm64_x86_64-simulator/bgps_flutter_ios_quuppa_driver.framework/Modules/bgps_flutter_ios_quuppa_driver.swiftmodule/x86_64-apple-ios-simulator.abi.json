@@ -1,0 +1,1757 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "bgps_flutter_ios_quuppa_driver",
+    "printedName": "bgps_flutter_ios_quuppa_driver",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Flutter",
+        "printedName": "Flutter",
+        "declKind": "Import",
+        "moduleName": "bgps_flutter_ios_quuppa_driver"
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "bgps_flutter_ios_quuppa_driver"
+      },
+      {
+        "kind": "Import",
+        "name": "CoreBluetooth",
+        "printedName": "CoreBluetooth",
+        "declKind": "Import",
+        "moduleName": "bgps_flutter_ios_quuppa_driver"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "BgpsFlutterQuuppaDriver",
+        "printedName": "BgpsFlutterQuuppaDriver",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "register",
+            "printedName": "register(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterPluginRegistrar",
+                "printedName": "any Flutter.FlutterPluginRegistrar",
+                "usr": "c:objc(pl)FlutterPluginRegistrar"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@bgps_flutter_ios_quuppa_driver@objc(cs)BgpsFlutterQuuppaDriver(cm)registerWithRegistrar:",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver23BgpsFlutterQuuppaDriverC8register4withySo0G15PluginRegistrar_p_tFZ",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "static": true,
+            "objc_name": "registerWithRegistrar:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "handle",
+            "printedName": "handle(_:result:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "FlutterMethodCall",
+                "printedName": "Flutter.FlutterMethodCall",
+                "usr": "c:objc(cs)FlutterMethodCall"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Any?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Any?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@bgps_flutter_ios_quuppa_driver@objc(cs)BgpsFlutterQuuppaDriver(im)handleMethodCall:result:",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver23BgpsFlutterQuuppaDriverC6handle_6resultySo0G10MethodCallC_yypSgctF",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "objc_name": "handleMethodCall:result:",
+            "declAttributes": [
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "BgpsFlutterQuuppaDriver",
+                "printedName": "bgps_flutter_ios_quuppa_driver.BgpsFlutterQuuppaDriver",
+                "usr": "c:@M@bgps_flutter_ios_quuppa_driver@objc(cs)BgpsFlutterQuuppaDriver"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@bgps_flutter_ios_quuppa_driver@objc(cs)BgpsFlutterQuuppaDriver(im)init",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver23BgpsFlutterQuuppaDriverCACycfc",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "onListen",
+            "printedName": "onListen(withArguments:eventSink:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Flutter.FlutterError?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "FlutterError",
+                    "printedName": "Flutter.FlutterError",
+                    "usr": "c:objc(cs)FlutterError"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Any?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Any?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Any?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@bgps_flutter_ios_quuppa_driver@objc(cs)BgpsFlutterQuuppaDriver(im)onListenWithArguments:eventSink:",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver23BgpsFlutterQuuppaDriverC8onListen13withArguments9eventSinkSo0G5ErrorCSgypSg_yAJctF",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "objc_name": "onListenWithArguments:eventSink:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onCancel",
+            "printedName": "onCancel(withArguments:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Flutter.FlutterError?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "FlutterError",
+                    "printedName": "Flutter.FlutterError",
+                    "usr": "c:objc(cs)FlutterError"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Any?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@bgps_flutter_ios_quuppa_driver@objc(cs)BgpsFlutterQuuppaDriver(im)onCancelWithArguments:",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver23BgpsFlutterQuuppaDriverC8onCancel13withArgumentsSo0G5ErrorCSgypSg_tF",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "objc_name": "onCancelWithArguments:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@bgps_flutter_ios_quuppa_driver@objc(cs)BgpsFlutterQuuppaDriver",
+        "mangledName": "$s30bgps_flutter_ios_quuppa_driver23BgpsFlutterQuuppaDriverC",
+        "moduleName": "bgps_flutter_ios_quuppa_driver",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "bgps_flutter_ios_quuppa_driver",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "BLEFrequency",
+        "printedName": "BLEFrequency",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "low",
+            "printedName": "low",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(bgps_flutter_ios_quuppa_driver.BLEFrequency.Type) -> bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BLEFrequency",
+                    "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                    "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "BLEFrequency",
+                        "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                        "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO3lowyA2CmF",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver12BLEFrequencyO3lowyA2CmF",
+            "moduleName": "bgps_flutter_ios_quuppa_driver"
+          },
+          {
+            "kind": "Var",
+            "name": "middle",
+            "printedName": "middle",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(bgps_flutter_ios_quuppa_driver.BLEFrequency.Type) -> bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BLEFrequency",
+                    "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                    "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "BLEFrequency",
+                        "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                        "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO6middleyA2CmF",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver12BLEFrequencyO6middleyA2CmF",
+            "moduleName": "bgps_flutter_ios_quuppa_driver"
+          },
+          {
+            "kind": "Var",
+            "name": "high",
+            "printedName": "high",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(bgps_flutter_ios_quuppa_driver.BLEFrequency.Type) -> bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BLEFrequency",
+                    "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                    "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "BLEFrequency",
+                        "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                        "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO4highyA2CmF",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver12BLEFrequencyO4highyA2CmF",
+            "moduleName": "bgps_flutter_ios_quuppa_driver"
+          },
+          {
+            "kind": "Var",
+            "name": "alwaysOn",
+            "printedName": "alwaysOn",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(bgps_flutter_ios_quuppa_driver.BLEFrequency.Type) -> bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BLEFrequency",
+                    "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                    "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "BLEFrequency",
+                        "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                        "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO8alwaysOnyA2CmF",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver12BLEFrequencyO8alwaysOnyA2CmF",
+            "moduleName": "bgps_flutter_ios_quuppa_driver"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(rawValue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BLEFrequency",
+                    "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                    "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO8rawValueACSgSi_tcfc",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver12BLEFrequencyO8rawValueACSgSi_tcfc",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "implicit": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "rawValue",
+            "printedName": "rawValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO8rawValueSivp",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver12BLEFrequencyO8rawValueSivp",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO8rawValueSivg",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver12BLEFrequencyO8rawValueSivg",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO",
+        "mangledName": "$s30bgps_flutter_ios_quuppa_driver12BLEFrequencyO",
+        "moduleName": "bgps_flutter_ios_quuppa_driver",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "enumRawTypeName": "Int",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RawRepresentable",
+            "printedName": "RawRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "RawValue",
+                "printedName": "RawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SY",
+            "mangledName": "$sSY"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Decodable",
+            "printedName": "Decodable",
+            "usr": "s:Se",
+            "mangledName": "$sSe"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Encodable",
+            "printedName": "Encodable",
+            "usr": "s:SE",
+            "mangledName": "$sSE"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "bgps_flutter_ios_quuppa_driver",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "bgps_flutter_ios_quuppa_driver",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "NetworkResponseIOSConfiguration",
+        "printedName": "NetworkResponseIOSConfiguration",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "tagid",
+            "printedName": "tagid",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5tagidSSvp",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5tagidSSvp",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5tagidSSvg",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5tagidSSvg",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5tagidSSvs",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5tagidSSvs",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5tagidSSvM",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5tagidSSvM",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "byte1",
+            "printedName": "byte1",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UInt8",
+                "printedName": "Swift.UInt8",
+                "usr": "s:s5UInt8V"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte1s5UInt8Vvp",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte1s5UInt8Vvp",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UInt8",
+                    "printedName": "Swift.UInt8",
+                    "usr": "s:s5UInt8V"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte1s5UInt8Vvg",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte1s5UInt8Vvg",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UInt8",
+                    "printedName": "Swift.UInt8",
+                    "usr": "s:s5UInt8V"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte1s5UInt8Vvs",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte1s5UInt8Vvs",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte1s5UInt8VvM",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte1s5UInt8VvM",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "byte2",
+            "printedName": "byte2",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UInt8",
+                "printedName": "Swift.UInt8",
+                "usr": "s:s5UInt8V"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte2s5UInt8Vvp",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte2s5UInt8Vvp",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UInt8",
+                    "printedName": "Swift.UInt8",
+                    "usr": "s:s5UInt8V"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte2s5UInt8Vvg",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte2s5UInt8Vvg",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UInt8",
+                    "printedName": "Swift.UInt8",
+                    "usr": "s:s5UInt8V"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte2s5UInt8Vvs",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte2s5UInt8Vvs",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte2s5UInt8VvM",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV5byte2s5UInt8VvM",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "tON",
+            "printedName": "tON",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Double?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV3tONSdSgvp",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV3tONSdSgvp",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV3tONSdSgvg",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV3tONSdSgvg",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV3tONSdSgvs",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV3tONSdSgvs",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV3tONSdSgvM",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV3tONSdSgvM",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "tOFF",
+            "printedName": "tOFF",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Double?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV4tOFFSdSgvp",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV4tOFFSdSgvp",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV4tOFFSdSgvg",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV4tOFFSdSgvg",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV4tOFFSdSgvs",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV4tOFFSdSgvs",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV4tOFFSdSgvM",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV4tOFFSdSgvM",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(from:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "NetworkResponseIOSConfiguration",
+                "printedName": "bgps_flutter_ios_quuppa_driver.NetworkResponseIOSConfiguration",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Decoder",
+                "printedName": "any Swift.Decoder",
+                "usr": "s:s7DecoderP"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV4fromACs7Decoder_p_tKcfc",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV4fromACs7Decoder_p_tKcfc",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "implicit": true,
+            "throwing": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "encode",
+            "printedName": "encode(to:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Encoder",
+                "printedName": "any Swift.Encoder",
+                "usr": "s:s7EncoderP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV6encode2toys7Encoder_p_tKF",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV6encode2toys7Encoder_p_tKF",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "implicit": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV",
+        "mangledName": "$s30bgps_flutter_ios_quuppa_driver31NetworkResponseIOSConfigurationV",
+        "moduleName": "bgps_flutter_ios_quuppa_driver",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Decodable",
+            "printedName": "Decodable",
+            "usr": "s:Se",
+            "mangledName": "$sSe"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Encodable",
+            "printedName": "Encodable",
+            "usr": "s:SE",
+            "mangledName": "$sSE"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "bgps_flutter_ios_quuppa_driver",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "QuuppaConfig",
+        "printedName": "QuuppaConfig",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "bluetoothFreq",
+            "printedName": "bluetoothFreq",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "BLEFrequency",
+                "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV13bluetoothFreqAA12BLEFrequencyOvp",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver12QuuppaConfigV13bluetoothFreqAA12BLEFrequencyOvp",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BLEFrequency",
+                    "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                    "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV13bluetoothFreqAA12BLEFrequencyOvg",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver12QuuppaConfigV13bluetoothFreqAA12BLEFrequencyOvg",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "BLEFrequency",
+                    "printedName": "bgps_flutter_ios_quuppa_driver.BLEFrequency",
+                    "usr": "s:30bgps_flutter_ios_quuppa_driver12BLEFrequencyO"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV13bluetoothFreqAA12BLEFrequencyOvs",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver12QuuppaConfigV13bluetoothFreqAA12BLEFrequencyOvs",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV13bluetoothFreqAA12BLEFrequencyOvM",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver12QuuppaConfigV13bluetoothFreqAA12BLEFrequencyOvM",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "byte0",
+            "printedName": "byte0",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UInt8",
+                "printedName": "Swift.UInt8",
+                "usr": "s:s5UInt8V"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte0s5UInt8Vvp",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte0s5UInt8Vvp",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UInt8",
+                    "printedName": "Swift.UInt8",
+                    "usr": "s:s5UInt8V"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte0s5UInt8Vvg",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte0s5UInt8Vvg",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UInt8",
+                    "printedName": "Swift.UInt8",
+                    "usr": "s:s5UInt8V"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte0s5UInt8Vvs",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte0s5UInt8Vvs",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte0s5UInt8VvM",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte0s5UInt8VvM",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "byte1",
+            "printedName": "byte1",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UInt8",
+                "printedName": "Swift.UInt8",
+                "usr": "s:s5UInt8V"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte1s5UInt8Vvp",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte1s5UInt8Vvp",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UInt8",
+                    "printedName": "Swift.UInt8",
+                    "usr": "s:s5UInt8V"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte1s5UInt8Vvg",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte1s5UInt8Vvg",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UInt8",
+                    "printedName": "Swift.UInt8",
+                    "usr": "s:s5UInt8V"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte1s5UInt8Vvs",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte1s5UInt8Vvs",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte1s5UInt8VvM",
+                "mangledName": "$s30bgps_flutter_ios_quuppa_driver12QuuppaConfigV5byte1s5UInt8VvM",
+                "moduleName": "bgps_flutter_ios_quuppa_driver",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(from:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "QuuppaConfig",
+                "printedName": "bgps_flutter_ios_quuppa_driver.QuuppaConfig",
+                "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Decoder",
+                "printedName": "any Swift.Decoder",
+                "usr": "s:s7DecoderP"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV4fromACs7Decoder_p_tKcfc",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver12QuuppaConfigV4fromACs7Decoder_p_tKcfc",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "implicit": true,
+            "throwing": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "encode",
+            "printedName": "encode(to:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Encoder",
+                "printedName": "any Swift.Encoder",
+                "usr": "s:s7EncoderP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV6encode2toys7Encoder_p_tKF",
+            "mangledName": "$s30bgps_flutter_ios_quuppa_driver12QuuppaConfigV6encode2toys7Encoder_p_tKF",
+            "moduleName": "bgps_flutter_ios_quuppa_driver",
+            "implicit": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:30bgps_flutter_ios_quuppa_driver12QuuppaConfigV",
+        "mangledName": "$s30bgps_flutter_ios_quuppa_driver12QuuppaConfigV",
+        "moduleName": "bgps_flutter_ios_quuppa_driver",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Decodable",
+            "printedName": "Decodable",
+            "usr": "s:Se",
+            "mangledName": "$sSe"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Encodable",
+            "printedName": "Encodable",
+            "usr": "s:SE",
+            "mangledName": "$sSE"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "bgps_flutter_ios_quuppa_driver",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "CoreBluetooth",
+        "printedName": "CoreBluetooth",
+        "declKind": "Import",
+        "moduleName": "bgps_flutter_ios_quuppa_driver"
+      },
+      {
+        "kind": "Import",
+        "name": "CoreLocation",
+        "printedName": "CoreLocation",
+        "declKind": "Import",
+        "moduleName": "bgps_flutter_ios_quuppa_driver"
+      },
+      {
+        "kind": "Import",
+        "name": "Combine",
+        "printedName": "Combine",
+        "declKind": "Import",
+        "moduleName": "bgps_flutter_ios_quuppa_driver"
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/Helpers\/BLEFrequency.swift",
+      "kind": "IntegerLiteral",
+      "offset": 236,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/Helpers\/BLEFrequency.swift",
+      "kind": "IntegerLiteral",
+      "offset": 256,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/Helpers\/BLEFrequency.swift",
+      "kind": "IntegerLiteral",
+      "offset": 274,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/Helpers\/BLEFrequency.swift",
+      "kind": "IntegerLiteral",
+      "offset": 296,
+      "length": 1,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/Helpers\/NetworkRequestConfiguration.swift",
+      "kind": "StringLiteral",
+      "offset": 311,
+      "length": 5,
+      "value": "\"ton\""
+    },
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/Helpers\/NetworkRequestConfiguration.swift",
+      "kind": "StringLiteral",
+      "offset": 337,
+      "length": 6,
+      "value": "\"toff\""
+    },
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/Helpers\/NetworkRequestConfiguration.swift",
+      "kind": "StringLiteral",
+      "offset": 381,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/Helpers\/NetworkRequestConfiguration.swift",
+      "kind": "IntegerLiteral",
+      "offset": 414,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/Helpers\/NetworkRequestConfiguration.swift",
+      "kind": "IntegerLiteral",
+      "offset": 446,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/Helpers\/QuuppaConfig.swift",
+      "kind": "StringLiteral",
+      "offset": 550,
+      "length": 15,
+      "value": "\"quuppaBLEFreq\""
+    },
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/Helpers\/QuuppaConfig.swift",
+      "kind": "StringLiteral",
+      "offset": 587,
+      "length": 13,
+      "value": "\"quuppaByte0\""
+    },
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/Helpers\/QuuppaConfig.swift",
+      "kind": "StringLiteral",
+      "offset": 622,
+      "length": 13,
+      "value": "\"quuppaByte1\""
+    },
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/Helpers\/QuuppaConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 712,
+      "length": 2,
+      "value": "21"
+    },
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/Helpers\/QuuppaConfig.swift",
+      "kind": "IntegerLiteral",
+      "offset": 731,
+      "length": 2,
+      "value": "26"
+    },
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/QuuppaDriver.swift",
+      "kind": "BooleanLiteral",
+      "offset": 484,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/valvoline\/Sources\/bgps_flutter_plugin\/ios\/Classes\/QuuppaDriver.swift",
+      "kind": "StringLiteral",
+      "offset": 764,
+      "length": 30,
+      "value": "\"com.synapseslab.beacondriver\""
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.2.3 effective-5.10 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+// swift-module-flags: -target arm64-apple-ios14.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name bgps_flutter_ios_quuppa_driver
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.3
+import Combine
+import CoreBluetooth
+import CoreLocation
+import Flutter
+import Foundation
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_exported import bgps_flutter_ios_quuppa_driver
+@objc @_inheritsConvenienceInitializers public class BgpsFlutterQuuppaDriver : ObjectiveC.NSObject, Flutter.FlutterPlugin {
+  @objc public static func register(with registrar: any Flutter.FlutterPluginRegistrar)
+  @objc public func handle(_ call: Flutter.FlutterMethodCall, result: @escaping Flutter.FlutterResult)
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension bgps_flutter_ios_quuppa_driver.BgpsFlutterQuuppaDriver : Flutter.FlutterStreamHandler {
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc dynamic public func onListen(withArguments arguments: Any?, eventSink events: @escaping Flutter.FlutterEventSink) -> Flutter.FlutterError?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc dynamic public func onCancel(withArguments arguments: Any?) -> Flutter.FlutterError?
+  #endif
+}
+public enum BLEFrequency : Swift.Int, Swift.Codable {
+  case low
+  case middle
+  case high
+  case alwaysOn
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.Int)
+  #endif
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public struct NetworkResponseIOSConfiguration : Swift.Codable {
+  public var tagid: Swift.String
+  public var byte1: Swift.UInt8
+  public var byte2: Swift.UInt8
+  public var tON: Swift.Double?
+  public var tOFF: Swift.Double?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct QuuppaConfig : Swift.Codable {
+  public var bluetoothFreq: bgps_flutter_ios_quuppa_driver.BLEFrequency
+  public var byte0: Swift.UInt8
+  public var byte1: Swift.UInt8
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+extension bgps_flutter_ios_quuppa_driver.BLEFrequency : Swift.Equatable {}
+extension bgps_flutter_ios_quuppa_driver.BLEFrequency : Swift.Hashable {}
+extension bgps_flutter_ios_quuppa_driver.BLEFrequency : Swift.RawRepresentable {}
